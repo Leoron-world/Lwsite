@@ -48,13 +48,14 @@ export default function fanstories({posts}) {
     <div className="container mx-auto px-10 mb-8">
         <input
       type="text"
-      placeholder="Search via author or Title"
+      placeholder="Search author or Title"
       className="w-full p-2 rounded-lg shadow-md mb-9"
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
     />
-      <FeaturedPosts />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <div className='text-4xl text-white py-4 mb-4'><h1 className='text-center'>Check Out Our Top Fan Stories</h1></div>
+      {/* <FeaturedPosts /> */}
+      {/* <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
           
             {filteredPosts.map((post, index) => (
@@ -69,7 +70,14 @@ export default function fanstories({posts}) {
             <Categories />
           </div>
         </div>
+      </div> */}
+
+      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7'>
+      {filteredPosts.map((post, index) => (
+              <PostCard key={index} post={post.node} />
+            ))}
       </div>
+
     </div>
   );
 }

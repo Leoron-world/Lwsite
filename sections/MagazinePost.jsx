@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
-import { FeaturedPostCard } from '../components';
-import { getFeaturedPosts } from '../services';
+import { MagazinePage } from '../components';
+import { getMagazineCover } from '../services';
 
 const responsive = {
   superLargeDesktop: {
@@ -24,12 +24,12 @@ const responsive = {
   },
 };
 
-const FeaturedPosts = () => {
+const MagazinePost = () => {
   const [featuredPosts, setFeaturedPosts] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
-    getFeaturedPosts().then((result) => {
+    getMagazineCover().then((result) => {
       setFeaturedPosts(result);
       setDataLoaded(true);
     });
@@ -55,12 +55,12 @@ const FeaturedPosts = () => {
     <div className="mb-8 text-white">
       <h1 className='px-4 text-3xl font-bold py-12 mb-12 text-center'>Check Out These User Made Magazines !</h1>
       <Carousel infinite customLeftArrow={customLeftArrow} customRightArrow={customRightArrow} responsive={responsive} itemClass="px-4">
-        {dataLoaded && featuredPosts.map((post, index) => (
-          <FeaturedPostCard key={index} post={post} />
+        {dataLoaded && featuredPosts.map((book, index) => (
+          <MagazinePage key={index} book={book} />
         ))}
       </Carousel>
     </div>
   );
 };
 
-export default FeaturedPosts;
+export default MagazinePost;

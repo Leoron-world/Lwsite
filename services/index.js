@@ -230,3 +230,71 @@ export const getRecentPosts = async () => {
 };
 
 
+export const getMagazineCover = async () => {
+  const query = gql`
+    query GetCover{
+      books {
+        author {
+          name
+          photo {
+            url
+          }
+          colorcode {
+            css
+            hex
+          }
+        }
+        title
+        slug
+        image {
+          url
+        }
+        content{
+          raw
+        }
+      }
+    }    
+  `;
+
+  const result = await request(graphqlAPI, query);
+
+  return result.books;
+};
+
+
+export const getMagDetails = async (slug) => {
+  const query = gql`
+    query GetMagazinePages($slug : String!) {
+      book(where: {slug: $slug}) {
+        pages {
+          content {
+            raw
+          }
+          title
+          pageImage {
+            url
+          }
+          author {
+            name
+            colorcode {
+              css
+              hex
+            }
+          }
+        }
+        slug
+
+        title
+
+        image {
+          url
+        }
+        }
+      }
+    
+  `;
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.book;
+}
+
