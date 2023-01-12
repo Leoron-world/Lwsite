@@ -1,21 +1,5 @@
 export default function Home(){
   return (
-    // <div className='container mx-auto px-10 mb-8'>
-    //   <Head>
-    //     <title>Fan Story</title>
-    //   </Head>
-    //   <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
-    //     <div className='lg:col-span-8 col-span-1'>
-    //       {posts.map((post) => ( <PostCard post={post.node} key={post.title} /> ))}
-    //     </div>
-    //     <div className='lg:col-span-8 col-span-1'>
-    //       <div className='lg:sticky relative top-8'>
-    //        <PostWidget />
-    //        <Categories />
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
     <div className=' place-content center  text-white text-center tracking-widest font-mono py-auto mt-24'>
       <h1 className="py-12">Welcome to the </h1>
       <h1 className="text-8xl">Leoron   <span className='text-green-500 px-5'>     World</span></h1>
