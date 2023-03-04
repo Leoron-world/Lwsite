@@ -1,67 +1,40 @@
-// import HTMLFlipBook from "react-pageflip";
-// const MagDetail = ({ book }) => {
-//   return (
-//     <HTMLFlipBook width={300} height={500}>
-//       {book.pages.map((page, index) => {
-//         return (
-//           <div key={index} className='bg-white p-4 rounded-lg shadow-lg' ref={(component) => (this.pageFlip = component)}>
-//             <h3 className='text-xl font-medium text-gray-800'>page number {index +1 }</h3>
-//             <h3 className='text-xl font-medium text-gray-800'>{page.title}</h3>
-//             {page.content.raw.children.map((child, childIndex) => {
-//               return <div key={childIndex} className='text-gray-700 leading-relaxed'>{child.children[0].text}</div>
-//             })}
-//             <h3 className='text-xl font-medium text-gray-800'>{page.author.name}</h3>
-//           </div>
-//         );
-//       })}
-//     </HTMLFlipBook>
-//   );
-// };
-
-// export default MagDetail;
-import HTMLFlipBook from 'react-pageflip'
-import { useRef } from 'react';
-
-
+import { useState } from 'react';
 
 
 const MagDetail = ({ book }) => {
-  const pagee = useRef(null);
+  const [currentPageIndex, setCurrentPageIndex] = useState(0);
+
+
   return (
-    <div className="flex flex-col h-full">
-      <HTMLFlipBook width={500} height={800} usePortrait={false} showCover={true} ref={pagee}>
+    <div className='w-full'>
+    <div className="flex h-full rounded-xl">
+      <div className="w-1/2 comment overflow-auto">
+        <div key={currentPageIndex} className={`p-6 rounded-xl shadow-lg page${currentPageIndex + 1} mx-auto`}>
+          <h3 className="text-2xl font-bold  pb-5">{book.pages[currentPageIndex].title}</h3>
+          <img src={book.pages[currentPageIndex].pageImage.url} alt="photo" className="border border-solid border-stone-900 h-72 w-full"/> 
+          {book.pages[currentPageIndex].content.raw.children.map((child, childIndex) => {
+            return <div key={childIndex} className="leading-relaxed mt-12 font-medium">{child.children[0].text}</div>
+          })}
+          <div className=" bottom-0  p-4 w-full">
+            <h3 className="text-xl font-bold text-center">Written by : {book.pages[currentPageIndex].author.name}</h3> 
+            <h3 className="text-xl font-medium text-center pr-5">Page {currentPageIndex +1 }</h3>
+          </div>
+        </div>
        
-<img src={book.image[0].url} className='object-cover'/>
-        
-        {book.pages.map((page, index) => {
-          return (
-            <div key={index}
-                 className={`p-6 rounded-lg shadow-lg page${index + 1} mx-auto`}
-                 ref={(component) => (this.flipBook = component)} >
-              <h3 className='text-2xl font-bold  pb-5'>{page.title}</h3>
-              <img src={page.pageImage.url} alt='photo' className='border border-solid border-stone-900 h-72 w-full'/> 
-              {page.content.raw.children.map((child, childIndex) => {
-                return <div key={childIndex} className='leading-relaxed mt-12 font-medium'>{child.children[0].text}</div>
-              })}
-              <div className="absolute bottom-0 flex justify-between p-4 w-full">
-                <h3 className='text-xl font-bold text-center'>Written by : {page.author.name}</h3> 
-                <h3 className='text-xl font-medium text-center pr-5'>Page {index +1 }</h3>
-              </div>
-            </div>
-            
-          );
-        })}
+      </div>
+      <div className="w-1/2  bg-white p-4 overflow-auto comment">
+        <h3 className="text-xl font-bold mb-4 ">Comment Section for Page {currentPageIndex + 1}</h3>
+        {/* Add comment section here */}
+         
+      </div>
+      </div>
       
-      </HTMLFlipBook>
-      <div className="flex justify-between p-4 w-full bottom-0">
-      <button onClick={() => pagee.current.pageFlip().flipPrev()} className='bg-blue-500 text-white px-3 mx-3'>
-        Prev page
-      </button>
-      <button onClick={() => pagee.current.pageFlip().flipNext()} className='bg-blue-500 text-white px-3 mx-3'>
-        Next page
-      </button>
+      <div className="flex justify-between">
+        <button className="text-xl font-medium bg-white p-3 rounded-lg" onClick={() => setCurrentPageIndex(currentPageIndex - 1)} disabled={currentPageIndex === 0}>Previous</button>
+        <button className="text-xl font-medium bg-white p-3 rounded-lg" onClick={() => setCurrentPageIndex(currentPageIndex + 1)} disabled={currentPageIndex === book.pages.length - 1}>Next</button>
       </div>
-      </div>
-);
+    </div>
+  );
 };
-export default MagDetail
+
+export default MagDetail;

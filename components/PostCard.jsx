@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import moment from 'moment';
+
 import Link from 'next/link';
 
 import { grpahCMSImageLoader } from '../util';

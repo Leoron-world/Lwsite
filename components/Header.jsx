@@ -1,9 +1,28 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import Link from 'next/link'
+import Test from '../pages/testing'
+
+import supabase from '../lib/index'
+import { useSession } from '@supabase/auth-helpers-react'
+
+
+
+
+async function signInWithGoogle() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    
+  });
+  if(error) {
+    console.error(error);
+  }
+  
+}
 
 
 const Header = () => {
-
+  const session = useSession();
+  
   return (
     <div className="container mx-auto px-10 mb-8">
     <div className="border-b w-full inline-block border-blue-400 py-8">
@@ -14,10 +33,17 @@ const Header = () => {
       </div>
       <div className="md:float-left md:contents">
         <div className="md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer px-2">
-        <Link href='/fan-stories' className='px-2'>Fan stories</Link> <Link href='/magazine' className='px-2' >Magazine</Link><Link href='/indian-football' className='px-2'>Indian Football</Link></div>
+
+        <Link href='/fan-stories' className='px-2'>Fan stories</Link> <Link href='/magazine' className='px-2' >Magazine</Link><Link href='/indian-football' className='px-2'>Indian Football</Link>
+        {!session && 
+        <button onClick={signInWithGoogle}>Login</button>
+}
+{session && <Link href='/profile'><button>Profile</button></Link>}
+        </div>
+      </div>
+      
       </div>
     </div>
-  </div>
 );
 };
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { FeaturedPosts } from '../sections'
 import { MagazinePost } from '../sections'
 import { getMagazineCover } from '../services'
 
@@ -7,7 +6,6 @@ import { getMagazineCover } from '../services'
 const magazine = () => {
   return (
     <div>
-        
         <MagazinePost />
     </div>
   )

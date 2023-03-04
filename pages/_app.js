@@ -1,13 +1,18 @@
-import React , {useEffect, useState} from 'react'
-import { Layout } from '../components'
 import '../styles/globals.scss'
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { SessionContextProvider } from '@supabase/auth-helpers-react'
+import { useState } from 'react'
+import Layout from '../components/Layout'
 
 function MyApp({ Component, pageProps }) {
-  return( 
-    <Layout>
-  <Component {...pageProps} />
-  </Layout>
+  const [supabase] = useState(() => createBrowserSupabaseClient())
+
+  return (
+    <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
+      <Layout>
+      <Component {...pageProps} />
+      </Layout>
+    </SessionContextProvider>
   )
 }
-
 export default MyApp
