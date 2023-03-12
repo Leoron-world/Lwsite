@@ -29,8 +29,6 @@ export default function Post2({ content, name, fan, photos, id, authorid, headin
   }
 
   async function deleteComments(){
- 
-  
     supabase
     .from('post2')
     .delete()
@@ -44,6 +42,7 @@ export default function Post2({ content, name, fan, photos, id, authorid, headin
       console.log(error);
     })
   }
+
   function editComment(e) {
     e.preventDefault();
     supabase

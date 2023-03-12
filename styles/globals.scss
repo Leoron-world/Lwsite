@@ -178,3 +178,80 @@ body {
   background-image: url('../public/RealMadrid.webp');
   background-size: 23px 19px;
 }
+
+// .indian-flag {
+ 
+//   background: linear-gradient(to bottom, #FF9933 0%, #FFFFFF 33.33%, #138808 66.66%, #FFFFFF 100%);
+// }
+.indian-flag {
+  background-color: #F0F0F0;
+  background-image: linear-gradient(to bottom, #FF9933, #FFFFFF, #128807);
+}
+
+.indian-flag p {
+  font-family: 'Montserrat', sans-serif;
+  color: #333333;
+}
+
+.indian-flag input[type="text"] {
+  border: 2px solid #128807;
+}
+
+.indian-flag button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.indian-flag button.bg-green-600 {
+  background-color: #128807;
+}
+
+.indian-flag button.bg-orange-500 {
+  background-color: #FF9933;
+}
+
+.indian-flag button.bg-indian-flag {
+  background-color: #128807;
+}
+
+.indian-flag button.text-white {
+  color: #FFFFFF;
+}
+
+.indian-flag .bg-indian-flag {
+  background-color: #128807;
+}
+
+.indian-flag .text-blue-600 {
+  color: #128807;
+}
+
+.indian-flag form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.indian-flag form input[type="text"] {
+  padding: 1rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.indian-flag form button[type="submit"] {
+  background-color: #66bb6a;
+  color: #fff;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
