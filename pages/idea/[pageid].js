@@ -2,16 +2,17 @@ import { useRouter } from 'next/router';
 import supabase from '../../lib';
 import { useState, useEffect } from 'react';
 import { useSession } from '@supabase/auth-helpers-react';
-
+import editIcon from '../../public/editcomment.jpeg'
+import Image from 'next/image';
 
 export default function IdeaDetail() {
     const session = useSession();
     const currentUser = session?.user?.id;
 
     const router = useRouter();
-    const { id } = router.query;
+    const { pageid } = router.query;
     const [ideas, setIdeas] = useState(null);
-    const [thoughts, setThoughts] = useState('');
+    const [ideatext, setIdeaText] = useState('');
     const [view, setView] = useState('');
     const [comments, setComments] = useState('');
     const [commentText, setCommentText] = useState('');
@@ -19,6 +20,10 @@ export default function IdeaDetail() {
     const [author, setAuthor] = useState('');
     const [uploads, setUploads] = useState([]);
     const [isUploading,setIsUploading] = useState(false);
+    const [ideaId, setIdeaId] = useState(null);
+    const [editing,setEditing ] = useState('');
+    const [newCommentText, setNewCommentText] = useState('');
+
 
     useEffect(() => {
         async function fetchData() {
@@ -32,9 +37,9 @@ export default function IdeaDetail() {
 
     async function fetchAuthor() {
         await supabase
-            .from('ideas')
-            .select('author')
-            .eq('id', id)
+            .from('idealist')
+            .select('*')
+            .eq('id', pageid )
             .then((result) => {
                 setAuthor(result.data);
             })
@@ -47,44 +52,68 @@ export default function IdeaDetail() {
                 .from('ideas')
                 .select('*,profiles(*)')
                 .eq('author', author[0].author)
-                .is('content', null)
-                .is('background', null)
-                .then((result) => setIdeas(result.data))
+                .is('comment', null)
+                
+                .then((result) => {
+                    setIdeas(result.data);
+                    setIdeaId(result.data[currentIndex].id);
+                })
                 .catch((error) => console.error(error));
         }
     }
 
-
-    async function fetchComments() {
-        await supabase
-            .from('ideas')
-            .select('*,profiles(*)')
-            .eq('parent', id)
-            .is('thoughts', null)
-            .then(result => setComments(result.data));
-
+     async function fetchComments() {
+        if (ideaId) { // check if ideaId is defined
+            await supabase
+                .from('ideas')
+                .select('*,profiles(*)')
+                .eq('parent', ideaId) // use ideaId instead of id
+                .is('ideatext', null)
+                .then(result => setComments(result.data));
+        }
     }
+
+    // async function editComment(e) {
+    //     e.preventDefault();
+    //    await supabase
+    //       .from("ideas")
+    //       .update({
+    //         content: newCommentText
+    //       })
+    //       .eq("id", editing)
+    //       .then((result) => {
+    //         setEditing('');
+    //         alert("Comment updated successfully.");
+    //         fetchComments();
+    //         console.log(result);
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //   }
+    
     async function postComment(ev) {
         ev.preventDefault();
+        
         await supabase
             .from('ideas')
             .insert([
                 {
-                    content: commentText,
+                    comment: commentText,
                     author: session.user.id,
-                    parent: id,
+                    parent: ideaId, // use ideaId instead of id
                 },
             ])
             .then((result) => {
                 alert('posted');
-                fetchComments();
                 setCommentText('');
+                setIdeaId(result.data.id); // save the id of the posted idea in the state variable
             })
             .catch((error) => {
                 console.error(error);
             });
+        
     }
-
 
 
 
@@ -96,17 +125,18 @@ export default function IdeaDetail() {
             .insert([
                 {
                     author: session.user.id,
-                    thoughts: view,
+                    ideatext: view,
                     photos:uploads,
+                    
                 },
             ])
             .then((result) => {
                 alert('posted');
                 fetchIdea();
-                setThoughts('');
+                setIdeaText('');
                 setView('');
                 setUploads([]);
-
+                
             });
     }
 
@@ -135,17 +165,21 @@ export default function IdeaDetail() {
     const goToPreviousIdea = () => {
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);
+            fetchIdea();
+            fetchComments();
         }
     };
 
     const goToNextIdea = () => {
         if (currentIndex < ideas.length - 1) {
             setCurrentIndex(currentIndex + 1);
+            fetchIdea();
+            fetchComments();
         }
     };
 
     if (!ideas) {
-        return <div>Loading...</div>;
+        return <div className='text-green-500 flex place-content-center'>Please Login To Continue</div>;
     }
 
     return (
@@ -164,9 +198,9 @@ export default function IdeaDetail() {
                     <div className="w-full flex justify-center relative">
 
                         <div className="w-1/2 text-blue-600 bg-white mx-6  p-4 rounded-xl mt-48 ring-2 ring-blue-600">
-                            {ideas[currentIndex]?.thoughts && (
+                            {ideas[currentIndex]?.ideatext && (
                                 <div>
-                                    <p className="text-xl font-bold text-black">{ideas[currentIndex].thoughts}</p>
+                                    <p className="text-xl font-bold text-black">{ideas[currentIndex].ideatext}</p>
                                     <img className='object-bottom w-full object-contain mb-4 mt-9' src={ideas[currentIndex].photos} alt='photo supporting the idea'/>
                                 </div>
                             )}
@@ -182,7 +216,13 @@ export default function IdeaDetail() {
                                                     {comment.profiles.username}
                                                 </span>
                                             </div>
-                                            <p className="text-sm">{comment.content}</p>
+                                            <p className="text-sm">{comment.comment}</p>
+                                          
+                    
+                  
+
+
+                    {/* fas fasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfasfas*/}
                                         </div>
                                     </div>
                                 ))}
@@ -190,6 +230,7 @@ export default function IdeaDetail() {
                                 <input
                                     type="text"
                                     placeholder="Enter Comment text"
+                                    
                                     onChange={(e) => setCommentText(e.target.value)}
                                     className="w-full mr-2 py-2 px-3 bg-gray-200 text-gray-800 rounded-md"
                                 />

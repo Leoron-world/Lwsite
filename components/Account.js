@@ -64,52 +64,59 @@ export default function Account({ session }) {
     }
 
     return (
-        <div className="form-widget text-white mx-48 px-4 bg-slate-500 py-24 flex justify-center flex-col place-content-center items-center rounded-lg border-4 border-green-600">
-          
-            <div>
-                <label htmlFor="username" className='pr-12'>Username:</label>
-                <input
-                    id="username"
-                    type="text"
-                    value={username || ''}
-                    className='text-green-800 mt-4'
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-            </div>
+        <div className=' h-screen flex items-center '>
+        <div className="form-widget mx-auto max-w-lg bg-slate-500 rounded-lg border-4 border-green-600 p-8 ">
+  <h2 className="text-white text-2xl font-bold mb-8">Update<span className='text-green-500'> Profile</span></h2>
+  <div className="mb-6">
+    <label htmlFor="username" className="text-green-500 block mb-2 font-bold">Username:</label>
+    <input
+      id="username"
+      type="text"
+      value={username || ''}
+      className="bg-white rounded px-3 py-2 w-full"
+      onChange={(e) => setUsername(e.target.value)}
+    />
+  </div>
 
-            <div>
-                <label htmlFor="club" className='pr-24'>Club:</label>
-               {!club &&  <select id="club" name="club" className='text-green-800 mt-4' placeholder='Choose Favourite Club' onChange={(e) => setClub(e.target.value)}>
-                    <option value="">Choose a club</option>
-                    <option value="ManCity">Manchester City</option>
-                    <option value="ManUtd">Manchester United</option>
-                    <option value="RealMadrid">Real Madrid</option>
-                    <option value="Barcelona">F.C Barcelona</option>
-                    <option value="Chelsea">Chelsea</option>
-                    <option value="Arsenal">Arsenal</option>
-                    <option value="PSG">Paris Saint Germain</option>
-                    <option value="Tottenham">Tottenham</option>
-                    <option value="Liverpool">Liverpool</option>
-                </select>}
-                {club && <span>{club}</span>}
-               
-            </div>
-          
-            <div>
-                <button
-                    className="button primary block bg-green-500 px-3 text-black py-1 mt-4 rounded-xl "
-                    onClick={() => updateProfile({ username, club, avatar_url })}
-                    disabled={loading}
-                >
-                    {loading ? 'Loading ...' : 'Update'}
-                </button>
-            </div>
+  <div className="mb-6">
+    <label htmlFor="club" className="text-green-500 inline-block mb-2 font-bold">Favorite Club:</label>
+    {!club && 
+      <select 
+        id="club" 
+        name="club" 
+        className="bg-white rounded px-3 py-2 w-full"
+        onChange={(e) => setClub(e.target.value)}
+      >
+        <option value="">Choose a club</option>
+        <option value="ManCity">Manchester City</option>
+        <option value="ManUtd">Manchester United</option>
+        <option value="RealMadrid">Real Madrid</option>
+        <option value="Barcelona">F.C Barcelona</option>
+        <option value="Chelsea">Chelsea</option>
+        <option value="Arsenal">Arsenal</option>
+        <option value="PSG">Paris Saint Germain</option>
+        <option value="Tottenham">Tottenham</option>
+        <option value="Liverpool">Liverpool</option>
+      </select>
+    }
+    {club && 
+      <span className="text-white mx-3">{club}</span>
+    }
+  </div>
 
-            <div>
-                <button className="button block mt-4" onClick={() => supabase.auth.signOut()}>
-                    Sign Out
-                </button>
-            </div>
-        </div>
+  <div className="flex justify-center">
+    <button
+      className="button primary bg-green-500 text-black px-6 py-2 rounded-xl mr-4"
+      onClick={() => updateProfile({ username, club, avatar_url })}
+      disabled={loading}
+    >
+      {loading ? 'Loading ...' : 'Update'}
+    </button>
+    <button className="button bg-gray-400 text-white px-6 py-2 rounded-xl hover:bg-green-600" onClick={() => supabase.auth.signOut()}>
+      Sign Out
+    </button>
+  </div>
+</div>
+</div>
     )
 }

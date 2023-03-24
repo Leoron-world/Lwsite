@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import supabase from "../lib";
 import { useSession } from "@supabase/auth-helpers-react";
 import Link from "next/link";
+import loadingImage from '../public/bg.jpg'
+import Image from "next/image";
 
 export default function ifootball() {
     const session = useSession();
     const [ideas, setIdeas] = useState('');
-    
+    const [isLoading, setIsLoading] = useState(true);
     const [headLine , setHeadLine] = useState('');
     const [uploads , setUploads] = useState([]);
     const [isUploading, setIsUploading] = useState('');
@@ -17,11 +19,16 @@ export default function ifootball() {
 
 
     async function fetchIdeas() {
-       await supabase
-            .from('ideas')
-            .select('*,profiles(*)')
-            .is('parent',null)
-            .then(result => setIdeas(result.data)); 
+      setIsLoading(true); // set isLoading to true before making the API call
+      await supabase
+        .from("idealist")
+        .select("*,profiles(*)")
+        // .is("parent", null) 
+        // .is("photos", null)
+        .then((result) => {
+          setIdeas(result.data);
+          setIsLoading(false); // set isLoading to false once the API call is complete
+        });
     }
  
     async function addPhotos(e) { 
@@ -48,12 +55,12 @@ export default function ifootball() {
     function postIdea(ev) {
         ev.preventDefault();
         supabase
-            .from('ideas')
+            .from('idealist')
             .insert([
                 {
                     author: session.user.id,
                     title: headLine,
-                    background: uploads,
+                    photo: uploads,
                 },
             ])
             .then((result) => {
@@ -68,6 +75,13 @@ export default function ifootball() {
                 console.error(error);
             });
     }
+
+    if (isLoading) { // if isLoading is true, render the loading animation
+      return <div className="flex items-center justify-center h-screen">
+      <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
+    </div>;
+    }
+
     return (
         <div>
             { ideas && ( 
@@ -77,7 +91,7 @@ export default function ifootball() {
         
       <div className='bg-white rounded-xl' key={idea.id}>
         <div className="overflow-hidden shadow-lg  ">
-          <img src={idea.background} alt="" className="object-top object-fit shadow-lg rounded-t-lg lg:rounded-lg rounded-full" />
+          <img src={idea.photo} alt="" className="object-top object-fit shadow-lg rounded-t-lg lg:rounded-lg rounded-full" />
         </div>
         <div className="pt-11 items-center text-center">
           <Link href={`/idea/${idea.id.toString()}`}>

@@ -16,7 +16,7 @@ export default magazine
 export async function getStaticProps() {
     const books = (await getMagazineCover()) || [];
     return {
-      props: { books },
+      props: { books,fallback:true },
     };
   }
   
