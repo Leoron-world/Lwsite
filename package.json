@@ -33,7 +33,7 @@
     "tailwindcss": "^3.2.4",
     "typescript": "4.9.4"
   },
-  "name": "leoron",
+  "name": "leoronworld",
   "description": "This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).",
   "version": "1.0.0",
   "main": "next.config.js",
@@ -44,7 +44,7 @@
     "type": "git",
     "url": "git+https://github.com/Leoron-world/Lwsite.git"
   },
-  "author": "",
+  "author": "Tathagat",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Leoron-world/Lwsite/issues"
