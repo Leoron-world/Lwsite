@@ -44,11 +44,11 @@ const Header = () => {
           } md:flex md:items-center md:w-auto`}
         >
           <div className="md:flex-grow">
-            <Link href="/fan-stories">
+            {/* <Link href="/fan-stories">
               <span className="block mt-4 md:inline-block md:mt-0 text-white font-semibold hover:text-green-500 mr-4">
                 Fan stories
               </span>
-            </Link>
+            </Link> */}
             <Link href="/magazine">
               <span className="block mt-4 md:inline-block md:mt-0 text-white font-semibold hover:text-green-500 mr-4">
                 Magazine
@@ -62,7 +62,7 @@ const Header = () => {
           </div>
           {!session && (
             <button
-              className="block mt-4 md:inline-block md:mt-0 text-white font-semibold hover:text-green-500 mr-4 focus:outline-none"
+              className="block mt-4 md:inline-block md:mt-0 text-white font-semibold hover:text-green-500 mr-4 focus:outline-none mx-2"
               onClick={signInWithGoogle}
             >
               Login

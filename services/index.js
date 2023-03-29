@@ -263,10 +263,7 @@ export const getMagazineCover = async () => {
           photo {
             url
           }
-          colorcode {
-            css
-            hex
-          }
+
         }
         title
         slug
@@ -300,10 +297,7 @@ export const getMagDetails = async (slug) => {
           }
           author {
             name
-            colorcode {
-              css
-              hex
-            }
+           
           }
         }
         slug
