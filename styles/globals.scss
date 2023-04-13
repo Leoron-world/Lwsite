@@ -2,21 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 
   &:before {
-    content: '';
+    content: "";
     content: "";
     width: 100%;
     height: 100vh;
-    //background: linear-gradient(to right bottom, #6d327c, #485DA6, #00a1ba, #01b18e, #32b37b);
     background: #000000;
+    // background: linear-gradient(to right bottom, #6d327c, #485DA6, #00a1ba, #01b18e, #32b37b);
+    // background: linear-gradient(to right bottom, #0b0b0b, #504f4f, #aeb0b0, #dee0e0, #ffffff);
     // background-image: url("../public/bg.jpg");
     position: fixed;
     left: 0;
@@ -28,10 +29,6 @@ body {
   }
 }
 
-
-
-
-
 @media screen and (max-width: 800px) {
   .HTMLFlipBook {
     width: 100%;
@@ -39,15 +36,9 @@ body {
   }
 }
 
-
 .commentsection {
-  background-image: url('../public/commentbg.jpeg');
-
+  background-image: url("../public/commentbg.jpeg");
 }
-
-
-
-
 
 .ManCity {
   background-color: rgb(108, 171, 221);
@@ -60,13 +51,9 @@ body {
 }
 
 .logoManCity {
-  background-image: url('../public/ManCity.png');
+  background-image: url("../public/ManCity.png");
   background-size: 24px 20px;
 }
-
-
-
-
 
 .Chelsea {
   background-color: rgb(3, 70, 148);
@@ -79,19 +66,18 @@ body {
 }
 
 .logoChelsea {
-  background-image: url('../public/chelsea.png');
+  background-image: url("../public/chelsea.png");
   background-size: 24px 20px;
 }
 
-
-
-
 .Barcelona {
-  background: repeating-linear-gradient(90deg,
-      rgb(32, 52, 181),
-      rgb(32, 52, 181) 45px,
-      rgb(128, 27, 57) 45px,
-      rgb(128, 27, 57) 90px);
+  background: repeating-linear-gradient(
+    90deg,
+    rgb(32, 52, 181),
+    rgb(32, 52, 181) 45px,
+    rgb(128, 27, 57) 45px,
+    rgb(128, 27, 57) 90px
+  );
   color: yellow;
   border: 4px solid yellow;
 }
@@ -101,11 +87,9 @@ body {
 }
 
 .logoBarcelona {
-  background-image: url('../public/barcelona.png');
+  background-image: url("../public/barcelona.png");
   background-size: 24px 20px;
 }
-
-
 
 .ManUtd {
   background-color: rgb(218, 41, 28);
@@ -114,15 +98,13 @@ body {
 }
 
 .uManUtd {
-  color: white
+  color: white;
 }
 
 .logoManUtd {
-  background-image: url('../public/ManUtd.png');
+  background-image: url("../public/ManUtd.png");
   background-size: 24px 20px;
 }
-
-
 
 .Tottenham {
   background-color: rgb(255, 255, 255);
@@ -135,9 +117,8 @@ body {
 }
 
 .logoTottenham {
-  background-image: url('../public/spurs.webp');
+  background-image: url("../public/spurs.webp");
 }
-
 
 .Liverpool {
   background-color: rgb(152, 0, 0);
@@ -150,9 +131,8 @@ body {
 }
 
 .logoLiverpool {
-  background-image: url('../public/Liverpool.png');
+  background-image: url("../public/Liverpool.png");
 }
-
 
 .PSG {
   background-color: rgb(17, 17, 73);
@@ -164,7 +144,7 @@ body {
 }
 
 .logoPSG {
-  background-image: url('../public/PSG.png');
+  background-image: url("../public/PSG.png");
 }
 
 .Arsenal {
@@ -178,7 +158,7 @@ body {
 }
 
 .logoArsenal {
-  background-image: url('../public/Arsenal.png');
+  background-image: url("../public/Arsenal.png");
 }
 
 .RealMadrid {
@@ -192,21 +172,21 @@ body {
 }
 
 .logoRealMadrid {
-  background-image: url('../public/RealMadrid.webp');
+  background-image: url("../public/RealMadrid.webp");
   background-size: 23px 19px;
 }
 
-// .indian-flag {
-
-//   background: linear-gradient(to bottom, #FF9933 0%, #FFFFFF 33.33%, #138808 66.66%, #FFFFFF 100%);
-// }
 .indian-flag {
-  background-color: #F0F0F0;
-  background-image: linear-gradient(to bottom, #FF9933, #FFFFFF, #128807);
+
+  background: linear-gradient(to bottom, #FF9933 0%, #FFFFFF 33.33%, #138808 66.66%, #FFFFFF 100%);
+}
+.indian-flag {
+  background-color: #f0f0f0;
+  background-image: linear-gradient(to bottom, #ff9933, #ffffff, #128807);
 }
 
 .indian-flag p {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #333333;
 }
 
@@ -215,7 +195,7 @@ body {
 }
 
 .indian-flag button {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -225,7 +205,7 @@ body {
 }
 
 .indian-flag button.bg-orange-500 {
-  background-color: #FF9933;
+  background-color: #ff9933;
 }
 
 .indian-flag button.bg-indian-flag {
@@ -233,7 +213,7 @@ body {
 }
 
 .indian-flag button.text-white {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .indian-flag .bg-indian-flag {
@@ -275,7 +255,7 @@ body {
 
 .redcircle {
   position: absolute;
-  content: '';
+  content: "";
   top: 0;
   left: 0;
   width: 200px;
@@ -284,21 +264,76 @@ body {
   border-radius: 50%;
 }
 
-.banner{
+.banner {
   font-family: bb;
   font-size: 100px;
   -webkit-text-stroke-color: #00ff00;
-  -webkit-text-fill-color: #FFF;
+  -webkit-text-fill-color: #fff;
   -webkit-text-stroke-width: 1px;
   text-shadow: 2px 2px 0 #00ff00;
 }
-.smallcircle{
+.smallcircle {
   position: absolute;
-  content: '';
+  content: "";
   top: 0;
   left: -10px;
   width: 30px;
   height: 30px;
   background: #e50914;
   border-radius: 50%;
+}
+
+// type effect style
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --gold: #10792e;
+  --light-shadow: #1d772e;
+  --dark-shadow: #2c2d2b;
+}
+// body {
+//   margin: 0;
+// }
+.wrapper {
+  background: radial-gradient(#000000);
+  display: grid;
+  grid-template-areas: "overlap";
+  place-content: center;
+  text-transform: uppercase;
+  // height: 50vh;
+}
+.wrapper > div {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: #363833;
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-size: clamp(1em, 3.2vw, 3rem);
+  grid-area: overlap;
+  letter-spacing: 1px;
+  -webkit-text-stroke: 4px transparent;
+}
+div.bg {
+  background-image: repeating-linear-gradient(
+    105deg,
+    var(--gold) 0%,
+    var(--dark-shadow) 5%,
+    var(--gold) 12%
+  );
+  color: transparent;
+  filter: drop-shadow(5px 15px 15px black);
+  transform: scaleY(1.05);
+  transform-origin: top;
+}
+div.fg {
+  background-image: repeating-linear-gradient(
+    5deg,
+    var(--gold) 0%,
+    var(--light-shadow) 23%,
+    var(--gold) 31%
+  );
+  color: #1e2127;
+  transform: scale(1);
 }
